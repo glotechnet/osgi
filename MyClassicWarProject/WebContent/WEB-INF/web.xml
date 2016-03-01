@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+
+	<context-param>
+		<description>Tiles configuration file</description>
+		<param-name>
+			org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
+		<param-value>/WEB-INF/tiles.xml</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>module1_servlet</servlet-name>
+		<servlet-class>com.mycompany.module1.MyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>module1_servlet</servlet-name>
+		<url-pattern>/module1/myservlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>module2_servlet</servlet-name>
+		<servlet-class>com.mycompany.module2.MyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>module2_servlet</servlet-name>
+		<url-pattern>/module2/myservlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>equinoxbridgeservlet</servlet-name>
+		<servlet-class>org.eclipse.equinox.servletbridge.BridgeServlet</servlet-class>
+		<init-param>
+			<param-name>commandline</param-name>
+			<param-value>-console</param-value>
+		</init-param>
+		<init-param>
+			<param-name>enableFrameworkControls</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>extendedFrameworkExports</param-name>
+			<param-value></param-value>
+		</init-param>
+
+		<!--
+			You can specify your own framework launcher here. The default is:
+			org.eclipse.equinox.servletbridge.FrameworkLauncher
+		-->
+		<init-param>
+			<param-name>frameworkLauncherClass</param-name>
+			<param-value>org.rsp.equinox.servletbridge.launcher.PdeFrameworkLauncher</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>equinoxbridgeservlet</servlet-name>
+		<url-pattern>/rsp/*</url-pattern>
+	</servlet-mapping>
+
+	<!--
+		mappings for root bundle <servlet-mapping>
+		<servlet-name>equinoxbridgeservlet</servlet-name>
+		<url-pattern>/home.jsp</url-pattern> </servlet-mapping>
+		<servlet-mapping> <servlet-name>equinoxbridgeservlet</servlet-name>
+		<url-pattern>/root.html</url-pattern> </servlet-mapping>
+	-->
+
+	<welcome-file-list>
+		<welcome-file>/home.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>
